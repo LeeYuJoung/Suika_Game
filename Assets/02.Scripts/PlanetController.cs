@@ -31,6 +31,14 @@ public class PlanetController : MonoBehaviour
     {
         int rdm = Random.Range(0, planetPrefabs.Length);
         planet = Instantiate(planetPrefabs[rdm], planetPos[rdm], Quaternion.identity);
+        planet.GetComponent<PlanetManager>().currentPlanet = (PlanetManager.PLANET)rdm;
+    }
+
+    public void UpgradePlanet(Vector3 spawnPos, int nextPlanet)
+    {
+        planet = Instantiate(planetPrefabs[nextPlanet], spawnPos, Quaternion.identity);
+        planet.GetComponent<PlanetManager>().currentPlanet = (PlanetManager.PLANET)nextPlanet;
+        planet.GetComponent<Rigidbody2D>().gravityScale = 2;
     }
 
     public void PlanetMove()
